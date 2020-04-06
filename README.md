@@ -1,0 +1,2 @@
+# FileManager
+Servicio escrito en Nodejs al que podemos subir ficheros por HTTP, nos devolverá el metadata a la vez que es guardado en redis, y el fichero en el pod (persistente o volátil), para poder ser descargado a posteriori por otro servicio sabiendo el UID del fichero almacenado.
