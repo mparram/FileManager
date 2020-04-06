@@ -29,7 +29,7 @@ if (!fs.existsSync(DIR)){
   }
  
 let upload = multer({ dest: DIR })
-app.post('/api/upload', upload.single("uploadfile"), function(req,res){
+app.post('/api/files', upload.single("uploadfile"), function(req,res){
     var uploadDate = new Date().getTime();
     var uid = req.file.filename;
     var ext = path.extname(req.file.originalname);
@@ -40,7 +40,7 @@ app.post('/api/upload', upload.single("uploadfile"), function(req,res){
 
  });
 
- app.get('/api/file/:file', (req, res) => {
+ app.get('/api/files/:file', (req, res) => {
     console.log("get file: "+ req.params.file);
     var pathfile = path.join(__dirname, DIR, req.params.file);
     console.log("pathfile: "+ pathfile);
