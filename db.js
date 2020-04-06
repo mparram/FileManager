@@ -15,7 +15,7 @@ var dbmodules = module.exports = {
         });
     },
     readfile: function(id, cb) {
-        client.hgetall(id, function(err, object) {
+        client.hgetall("uploadfile:" + id, function(err, object) {
             console.log("reading from redis: ");
             console.log(object);
             cb(object);
