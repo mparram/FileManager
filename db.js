@@ -10,7 +10,7 @@ client.on("error", function(error) {
 var dbmodules = module.exports = {
     writefile: function(id, url, filename, size, ext, uploadDate, encoding, mimetype) {
         client.hmset("uploadfile:" + id, "url", url, "filename", filename, "size", size, "ext", ext, "uploadDate", uploadDate, "encoding", encoding, "mimetype", mimetype, function (err, reply) {
-            console.log("added key to redis: " + id);
+            console.log("added key to redis: uploadfile:" + id);
             console.log(reply);
         });
     },

@@ -6,7 +6,6 @@ var express = require('express')
   , db = require('./db')
   , kafka = require('./kafka')
   , fs = require('fs')
-  , uniqid = require('uniqid')
   , findRemoveSync = require('find-remove')
   , CronJob = require('cron').CronJob;
 app.use(cors());
@@ -36,6 +35,7 @@ app.post('/api/upload', upload.single("uploadfile"), function(req,res){
     var ext = path.extname(req.file.originalname);
     console.log({method: req.file.fieldname, filename: req.file.originalname, size: req.file.size, uid: uid, ext: ext, date: uploadDate});
     db.writefile(uid, 'http://' + req.headers.host + '/api/file/' + uid, req.file.originalname,req.file.size, ext, uploadDate, req.file.encoding, req.file.mimetype);
+    kafka.writefile(uid, 'http://' + req.headers.host + '/api/file/' + uid, req.file.originalname,req.file.size, ext, uploadDate, req.file.encoding, req.file.mimetype);
     res.json({'msg': 'File uploaded successfully!', 'uid': uid, 'url': 'http://' + req.headers.host + '/api/file/' + uid,'filename': req.file.originalname, 'size': req.file.size, 'ext': ext,'date': uploadDate, 'encoding': req.file.encoding, 'mimetype': req.file.mimetype});
 
  });
